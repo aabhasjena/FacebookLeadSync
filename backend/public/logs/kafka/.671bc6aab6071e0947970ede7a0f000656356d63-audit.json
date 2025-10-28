@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 20
+    },
+    "auditLog": "public\\logs\\kafka\\.671bc6aab6071e0947970ede7a0f000656356d63-audit.json",
+    "files": [
+        {
+            "date": 1758181073969,
+            "name": "public\\logs\\kafka\\error-18-09-2025.log",
+            "hash": "97033a52f1e0ff956a9b5cc1db42a631c747a076758d2563f1203408c96f0efb"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model fblead {
+  id          Int      @id @default(autoincrement())
+  leadId      String   @unique
+  pageId      String?
+  formId      String?
+  createdTime DateTime?
+  fetchedAt   DateTime?
+  data        Json
+  raw         Json?
+  insertedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([pageId])
+  @@index([formId])
+}
+
+model PageCredential {
+  id          Int           @id @default(autoincrement())
+  pageId      String        @unique
+  pageToken   String        @db.LongText
+  label       String?       // optional friendly name
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  // relations
+  forms       PageForm[]    @relation("PageToForms")
+
+  @@index([pageId])
+}
+
+model PageForm {
+  id          Int              @id @default(autoincrement())
+  formId      String           @unique
+  pageId      String
+  name        String?          // label of the form if available
+  lastSeen    DateTime?        // when we last saw it
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // relation to PageCredential
+  page        PageCredential?  @relation("PageToForms", fields: [pageId], references: [pageId])
+
+  @@index([pageId])
+  @@index([formId])
+}
+
