@@ -136,6 +136,53 @@ if (fs.existsSync(credsRouterPath)) {
 }
 
 /* ----------------------------
+   Root route (Welcome page)
+   ---------------------------- */
+
+app.get('/', (req, res) => {
+  res.send(`
+    <html>
+      <head>
+        <title>Welcome to LeadSync</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background: #f9fafc;
+            color: #333;
+            text-align: center;
+            padding-top: 100px;
+          }
+          h1 {
+            color: #007bff;
+          }
+          p {
+            font-size: 18px;
+            margin-top: 10px;
+          }
+          .info {
+            margin-top: 30px;
+            color: #666;
+            font-size: 14px;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>🚀 Welcome to LeadSync API</h1>
+        <p>Your commercial lead synchronization server is running successfully.</p>
+        <div class="info">
+          <p>Available endpoints:</p>
+          <ul style="list-style:none; padding:0;">
+            <li>➡️ <b>/leadsync/facebook-leads</b> — Fetch Facebook leads</li>
+            <li>➡️ <b>/leadsync/facebook-credentials</b> — Manage Facebook credentials</li>
+          </ul>
+        </div>
+      </body>
+    </html>
+  `);
+});
+
+
+/* ----------------------------
    Start server
    ---------------------------- */
 
